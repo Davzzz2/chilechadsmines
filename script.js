@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 async function checkIfLive() {
     try {
-        const response = await fetch('https://kick.com/api/v1/channels/enjayy'); // Adjusted for the correct channel
+        const response = await fetch('https://kick.com/api/v1/channels/chilechads'); // Adjusted for the correct channel
         const data = await response.json();
 
         const isLive = data.livestream && data.livestream.is_live;
