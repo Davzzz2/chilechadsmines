@@ -106,18 +106,13 @@ function halveBet() {
 }
 
 function randomizeMinesAndDiamonds() {
-    const minMines = parseInt(document.getElementById('minMines').value);
-    const maxMines = parseInt(document.getElementById('maxMines').value);
-    const minDiamonds = parseInt(document.getElementById('minDiamonds').value);
-    const maxDiamonds = parseInt(document.getElementById('maxDiamonds').value);
+    const totalCells = 25;
 
-    if (minMines > maxMines || minDiamonds > maxDiamonds) {
-        alert('Invalid range values!');
-        return;
-    }
+    // Randomly pick a number for mines between 1 and 24
+    let mines = Math.floor(Math.random() * 24) + 1;
 
-    const mines = Math.floor(Math.random() * (maxMines - minMines + 1)) + minMines;
-    const diamonds = Math.floor(Math.random() * (maxDiamonds - minDiamonds + 1)) + minDiamonds;
+    // Randomly pick a number for diamonds between 1 and (25 - mines)
+    let diamonds = Math.floor(Math.random() * (totalCells - mines)) + 1;
 
     document.getElementById('mines').value = mines;
     document.getElementById('diamonds').value = diamonds;
@@ -125,30 +120,9 @@ function randomizeMinesAndDiamonds() {
     generateMinesBoard();
 }
 
-// Add this function to your existing JavaScript file (script.js)
-
-function toggleRandomizationFields() {
-    const randomizationFields = document.getElementById('randomizationFields');
-    const randomizeButton = document.getElementById('randomizeButton');
-    const isChecked = document.getElementById('toggleRandomization').checked;
-    if (isChecked) {
-        randomizationFields.style.display = 'flex';
-        randomizeButton.disabled = false;
-    } else {
-        randomizationFields.style.display = 'none';
-        randomizeButton.disabled = true;
-    }
-}
-
-// Ensure randomization fields are hidden and button is disabled by default
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('randomizationFields').style.display = 'none';
-    document.getElementById('randomizeButton').disabled = true;
-});
-
 async function checkIfLive() {
     try {
-        const response = await fetch('https://kick.com/api/v1/channels/chilechads'); // Adjusted for the correct channel
+        const response = await fetch('https://kick.com/api/v1/channels/chillichads');
         const data = await response.json();
 
         const isLive = data.livestream && data.livestream.is_live;
@@ -157,12 +131,12 @@ async function checkIfLive() {
         if (isLive) {
             statusText.style.color = 'green';
         } else {
-            statusText.style.color = 'red';
+            statusText.style.color = 'grey';
         }
     } catch (error) {
         console.error('Error fetching live status:', error);
         const statusText = document.getElementById('live-status-text');
-        statusText.style.color = 'grey'; // Grey if there’s an error
+        statusText.style.color = 'grey';
     }
 }
 
@@ -171,4 +145,3 @@ window.onload = checkIfLive;
 
 // Refresh the status every minute:
 setInterval(checkIfLive, 60000);
-
