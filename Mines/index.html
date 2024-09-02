@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamble Assist</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        /* Back button styling */
+        .back-arrow {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 48px;
+            height: 48px;
+            border: 2px solid #c11920; /* Red circle border */
+            background-color: #c11920; /* Red background */
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .back-arrow svg {
+            fill: white; /* White arrow inside the red circle */
+            width: 24px;
+            height: 24px;
+        }
+
+        .back-arrow:hover {
+            background-color: white; /* Change background to white on hover */
+        }
+
+        .back-arrow:hover svg {
+            fill: #c11920; /* Change arrow to red on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-arrow" onclick="window.location.href='https://chillichads.com'">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+    </button>
+
+    <div class="header-links">
+        <a href="https://www.youtube.com/@chillichads" target="_blank">ChilliChads Youtube</a>
+        <a href="https://discord.gg/VkpTKyG65J" target="_blank">ChilliChads Discord</a>
+        <a href="http://kick.com/chillichads" target="_blank">
+            ChilliChads Kick
+            <span id="live-status-text">LIVE</span>
+        </a>
+        <a href="http://stake.com/?c=chillichads" target="_blank">Code ChilliChads on Stake</a>
+    </div>
+    <div class="announcement">
+        <strong>Updates Posted in Discord</strong>
+    </div>
+    <div class="container">
+        <h1 class="header">Mines Assistant</h1>
+        <div class="wrapper">
+            <div>
+                <form id="minesForm">
+                    <div class="form-group">
+                        <label for="mines">Number of Mines:</label>
+                        <input type="number" id="mines" name="mines" min="1" max="24" required>
+                        <label for="diamonds">Number of Diamonds:</label>
+                        <input type="number" id="diamonds" name="diamonds" min="1" max="25" required>
+                        <label for="betSize">Bet Size:</label>
+                        <input type="number" id="betSize" name="betSize" step="0.01" min="0.01" required>
+                        <button type="button" onclick="doubleBet()">2x</button>
+                        <button type="button" onclick="halveBet()">1/2</button>
+                        <button type="button" onclick="generateMinesBoard()">Generate Mines Board</button>
+                        <button type="button" id="randomizeButton" onclick="randomizeMinesAndDiamonds()">Randomize</button>
+                    </div>
+                </form>
+                <div id="minesBoard"></div>
+                <div id="minesResults"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <strong>Made by Dave</strong>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
